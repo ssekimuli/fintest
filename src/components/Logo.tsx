@@ -1,30 +1,30 @@
 import type { CSSProperties, FC } from "react";
-import logoImg from "../assets/logo.png";
-import logoTransparentImg from "../assets/logo-transparent.png";
+import { LOGO_DARK_NAV, LOGO_LIGHT_BG } from "../assets/logoData";
 
 export interface LogoProps {
-  /** Explicit height in pixels or CSS string (e.g. 54, '54px', '3.5rem') */
+  /** Explicit height in pixels or CSS string (e.g. 56, '56px', '3.5rem') */
   height?: number | string;
   /** Explicit width in pixels or CSS string (e.g. 'auto', 180, '100%') */
   width?: number | string;
-  /** Maximum height constraint (e.g. '100%', 80) */
+  /** Maximum height constraint */
   maxHeight?: number | string;
   /** Maximum width constraint */
   maxWidth?: number | string;
-  /** Whether to use the transparent background version of the logo */
-  transparent?: boolean;
   /**
-   * Wrap with a subtle, clean white badge for optimal contrast on dark backgrounds
-   * Default: true when light={true} or header/footer dark context
+   * Theme mode:
+   * - 'dark' (default): For dark navbar and footer (crisp white typography on transparent bg)
+   * - 'light': For light backgrounds (authentic dark navy typography on transparent bg)
    */
+  theme?: "dark" | "light";
+  /** Optional badge wrapper (default: false, renders seamless transparent logo) */
   badge?: boolean;
-  /** Light/dark variant flag for theme consistency */
+  /** Compatibility with light prop */
   light?: boolean;
-  /** Custom CSS classes for the outer wrapper/link */
+  /** Custom CSS classes for the link wrapper */
   className?: string;
   /** Custom CSS classes directly on the img tag */
   imageClassName?: string;
-  /** Custom inline style for the outer container */
+  /** Custom inline style for the link wrapper */
   style?: CSSProperties;
   /** Custom inline style for the img element */
   imageStyle?: CSSProperties;
@@ -42,22 +42,31 @@ const formatSize = (value?: number | string): string | undefined => {
 };
 
 export const Logo: FC<LogoProps> = ({
-  height = 54,
+  height = 56,
   width = "auto",
   maxHeight,
   maxWidth = "100%",
-  transparent = false,
-  badge = true,
+  theme = "dark",
+  badge = false,
   light = false,
   className = "",
   imageClassName = "",
   style,
   imageStyle,
-  alt = "Titanium Financial Consultancy Co. Ltd - Journey to Financial Freedom",
+  alt = "Titanium Financial Consultancy",
   href = "/",
   src,
 }) => {
-  const chosenSrc = src || (transparent ? logoTransparentImg : logoImg);
+  // Determine image source based on theme/props
+  let chosenSrc = src;
+  if (!chosenSrc) {
+    if (theme === "light" && !light) {
+      chosenSrc = LOGO_LIGHT_BG;
+    } else {
+      // Default to dark nav theme (crisp white typography, works on dark nav & dark footer)
+      chosenSrc = LOGO_DARK_NAV;
+    }
+  }
 
   const formattedHeight = formatSize(height);
   const formattedWidth = formatSize(width);
@@ -68,6 +77,7 @@ export const Logo: FC<LogoProps> = ({
     display: "inline-flex",
     alignItems: "center",
     textDecoration: "none",
+    flexShrink: 0,
     ...style,
   };
 
@@ -84,19 +94,18 @@ export const Logo: FC<LogoProps> = ({
   return (
     <a
       href={href}
-      className={`logo ${badge ? "logo--badge" : ""} ${light ? "logo--light" : ""} ${className}`.trim()}
+      className={`logo ${badge ? "logo--badge" : ""} ${className}`.trim()}
       style={containerStyles}
-      aria-label={alt}
+      aria-label="Titanium Financial Consultancy Co. Ltd - Journey to Financial Freedom"
     >
-      <div className={badge ? "logo__badge-wrapper" : "logo__image-wrapper"}>
-        <img
-          src={chosenSrc}
-          alt={alt}
-          className={`logo__image ${imageClassName}`.trim()}
-          style={imgStyles}
-          loading="eager"
-        />
-      </div>
+      <img
+        src={chosenSrc}
+        alt={alt}
+        className={`logo__image ${imageClassName}`.trim()}
+        style={imgStyles}
+        loading="eager"
+        decoding="sync"
+      />
     </a>
   );
 };
