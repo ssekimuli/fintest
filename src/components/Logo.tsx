@@ -1,4 +1,5 @@
 import type { CSSProperties, FC } from "react";
+import { Link } from "react-router";
 import { LOGO_DARK_NAV, LOGO_LIGHT_BG } from "../assets/logoData";
 
 export interface LogoProps {
@@ -92,8 +93,8 @@ export const Logo: FC<LogoProps> = ({
   };
 
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className={`logo ${badge ? "logo--badge" : ""} ${className}`.trim()}
       style={containerStyles}
       aria-label="Titanium Financial Consultancy Co. Ltd - Journey to Financial Freedom"
@@ -106,7 +107,7 @@ export const Logo: FC<LogoProps> = ({
         loading="eager"
         decoding="sync"
       />
-    </a>
+    </Link>
   );
 };
 

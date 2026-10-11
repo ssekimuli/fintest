@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode, useState } from "react";
+import { Link } from "react-router";
 import Logo from "./Logo";
 import managingDirectorImg from "../assets/managing-director.png";
 
@@ -376,14 +377,14 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               ["FAQ", "/faq"],
               ["Contact", "/contact"],
             ].map(([label, href]) => (
-              <a key={label} href={href} onClick={() => setMenuOpen(false)}>
+              <Link key={label} to={href} onClick={() => setMenuOpen(false)}>
                 {label}
-              </a>
+              </Link>
             ))}
-            <a className="button button--primary nav__cta" href="/contact" onClick={() => setMenuOpen(false)}>
+            <Link className="button button--primary nav__cta" to="/contact" onClick={() => setMenuOpen(false)}>
               Get Consultation
               <Icon name="arrow" size={18} />
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -406,13 +407,13 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                 across Uganda—built around sound management, compliance, growth, and long-term sustainability.
               </p>
               <div className="hero__actions">
-                <a className="button button--primary button--large" href="/contact">
+                <Link className="button button--primary button--large" to="/contact">
                   Schedule Consultation
                   <Icon name="arrow" size={19} />
-                </a>
-                <a className="button button--outline button--large" href="/services">
+                </Link>
+                <Link className="button button--outline button--large" to="/services">
                   View Services
-                </a>
+                </Link>
               </div>
               <div className="hero__proof">
                 <div className="proof__avatars" aria-hidden="true">
@@ -504,10 +505,10 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                 <span>Service {services[selectedService].number}</span>
                 <h3>{services[selectedService].title}</h3>
                 <p>{services[selectedService].about}</p>
-                <a className="button button--primary" href="/contact">
+                <Link className="button button--primary" to="/contact">
                   Discuss this service
                   <Icon name="arrow" size={18} />
-                </a>
+                </Link>
               </div>
               <div className="service-detail__deliverables">
                 <span>What we can help with</span>
@@ -556,10 +557,10 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                   <strong>Rowan Village Mall</strong>
                 </span>
               </div>
-              <a className="text-link" href="/contact">
+              <Link className="text-link" to="/contact">
                 Let&apos;s grow your business
                 <Icon name="arrow" size={18} />
-              </a>
+              </Link>
             </div>
             <div className="trust-grid">
               {trustPoints.map((point) => (
@@ -627,10 +628,10 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                 <strong>One connected team.</strong> Whatever your financial need, you&apos;ll have the right
                 specialist by your side.
               </p>
-              <a className="text-link" href="/contact">
+              <Link className="text-link" to="/contact">
                 Work with us
                 <Icon name="arrow" size={18} />
-              </a>
+              </Link>
             </div>
           </div>
           </section>
@@ -656,7 +657,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                 </span>
                 <span>
                   <small>Still have a question?</small>
-                  <a href="/contact">Talk to our team</a>
+                  <Link to="/contact">Talk to our team</Link>
                 </span>
               </div>
             </div>
@@ -791,19 +792,19 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
           </div>
           <div className="footer__links">
             <strong>Explore</strong>
-            <a href="/">Home</a>
-            <a href="/services">Services</a>
-            <a href="/about">About us</a>
-            <a href="/team">Our team</a>
-            <a href="/faq">FAQ</a>
-            <a href="/contact">Contact</a>
+            <Link to="/">Home</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/about">About us</Link>
+            <Link to="/team">Our team</Link>
+            <Link to="/faq">FAQ</Link>
+            <Link to="/contact">Contact</Link>
           </div>
           <div className="footer__links">
             <strong>Services</strong>
-            <a href="/services">Accounting &amp; Audit</a>
-            <a href="/services">Taxation &amp; Filing</a>
-            <a href="/services">Lending &amp; Investment</a>
-            <a href="/services">Land &amp; Property</a>
+            <Link to="/services">Accounting &amp; Audit</Link>
+            <Link to="/services">Taxation &amp; Filing</Link>
+            <Link to="/services">Lending &amp; Investment</Link>
+            <Link to="/services">Land &amp; Property</Link>
           </div>
           <div className="footer__contact">
             <strong>Get in touch</strong>

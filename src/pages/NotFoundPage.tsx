@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function NotFoundPage() {
   return (
     <main className="not-found">
@@ -5,9 +7,9 @@ function NotFoundPage() {
         <span>404</span>
         <h1>That page could not be found.</h1>
         <p>The page may have moved, or the address may be incorrect.</p>
-        <a className="button button--primary" href="/">
+        <Link className="button button--primary" to="/">
           Return to homepage
-        </a>
+        </Link>
       </div>
     </main>
   );
