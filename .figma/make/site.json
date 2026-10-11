@@ -1,0 +1,10 @@
+{
+  "description": "This professional landing page connects potential clients with Titanium Financial Consultancy, offering services in accounting, auditing, and business registration.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
