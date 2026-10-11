@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode, useState } from "react";
+import Logo from "./Logo";
 
 type IconName =
   | "arrow"
@@ -95,19 +96,6 @@ function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
   );
 }
 
-function Logo({ light = false }: { light?: boolean }) {
-  return (
-    <a className={`logo ${light ? "logo--light" : ""}`} href="/" aria-label="Titanium Financial home">
-      <span className="logo__mark" aria-hidden="true">
-        <span>T</span>
-      </span>
-      <span className="logo__copy">
-        <strong>Titanium</strong>
-        <small>Financial Consultancy</small>
-      </span>
-    </a>
-  );
-}
 
 const services: {
   icon: IconName;
@@ -367,7 +355,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
     <div className={`site-shell site-shell--${page}`}>
       <header className="header">
         <div className="container header__inner">
-          <Logo />
+          <Logo height={52} width="auto" />
           <button
             className="menu-button"
             type="button"
@@ -792,7 +780,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
       <footer className="footer">
         <div className="container footer__grid">
           <div className="footer__brand">
-            <Logo light />
+            <Logo light height={62} width="auto" />
             <p>Clear advice. Compliant finances. Confident growth.</p>
           </div>
           <div className="footer__links">
