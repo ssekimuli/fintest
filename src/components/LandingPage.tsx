@@ -1,5 +1,6 @@
 import { FormEvent, ReactNode, useState } from "react";
 import Logo from "./Logo";
+import managingDirectorImg from "../assets/managing-director.png";
 
 type IconName =
   | "arrow"
@@ -255,6 +256,7 @@ const team = [
     name: "Namakoola Vivian Ritah",
     role: "Managing Director",
     specialty: "Leadership · Strategic direction · Operations · Service delivery · Growth",
+    image: managingDirectorImg,
   },
   {
     id: "director-accounting-finance-taxation",
@@ -601,8 +603,12 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
             <div className="team__grid">
               {team.map((member, index) => (
                 <article className="team-card" key={member.id}>
-                  <div className="team-card__image team-card__image--symbol">
-                    <Icon name={member.icon} size={56} />
+                  <div className={`team-card__image ${member.image ? "" : "team-card__image--symbol"}`}>
+                    {member.image ? (
+                      <img src={member.image} alt={member.name} loading="lazy" />
+                    ) : (
+                      <Icon name={member.icon} size={56} />
+                    )}
                     <span className="team-card__index">0{index + 1}</span>
                   </div>
                   <div className="team-card__content">

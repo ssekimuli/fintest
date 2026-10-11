@@ -941,7 +941,7 @@ a {
 
 .team-card__image--symbol {
   display: grid;
-  height: 240px;
+  height: 365px;
   place-items: center;
   color: rgba(255, 255, 255, 0.9);
   background:
