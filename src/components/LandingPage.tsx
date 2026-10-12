@@ -367,8 +367,6 @@ const clientDocuments: {
   filePath: string;
   downloadName: string;
   icon: IconName;
-  summary: string;
-  points: string[];
 }[] = [
   {
     id: "free-agent-agreement",
@@ -381,14 +379,6 @@ const clientDocuments: {
     filePath: "/documents/revised-free-agent-agreement.pdf",
     downloadName: "Revised Free Agent Agreement.pdf",
     icon: "target",
-    summary:
-      "Formal legal framework and terms under which Free-Agent Investors deposit savings with Titanium Financial Consultancy Co. Ltd to earn guaranteed annual interest returns.",
-    points: [
-      "Maximum savings cap: UGX 8,000,000 within any single financial year",
-      "Tier 1 (UGX 4.8M+ @ 30% p.a.) · Tier 2 (UGX 3.6M–4.79M @ 25% p.a.) · Tier 3 (UGX 2.4M–3.59M @ 20% p.a.)",
-      "Fixed 12-month tenure with documented early exit & penalty schedule",
-      "Designated banking, Next of Kin, witness execution, and dispute resolution clauses",
-    ],
   },
   {
     id: "short-loan-agreement",
@@ -401,14 +391,6 @@ const clientDocuments: {
     filePath: "/documents/continuing-clients-loan-agreement.pdf",
     downloadName: "Continuing Clients Loan Document Free.pdf",
     icon: "calculator",
-    summary:
-      "Legally documented facility agreement for prospective and continuing borrowers seeking short-term cash credit with documented repayment terms and strict payment channels.",
-    points: [
-      "Clear documentation of principal sum, monthly payment amount, and loan tenure",
-      "Explicit late payment terms and transparent monthly interest calculation",
-      "Designated official transaction lines: 0744 846 643 / 0771 939 934 (Vivian Namakoola)",
-      "Sign-off sections for Borrower, Guarantor, Loan's Officer (Namutebi Winnie), and Treasurer (Namakoola Vivian Ritah)",
-    ],
   },
   {
     id: "credit-application-and-guarantee",
@@ -421,14 +403,6 @@ const clientDocuments: {
     filePath: "/documents/client-registration-credit-application-form.pdf",
     downloadName: "Loan Application Form Titanium.pdf",
     icon: "shield",
-    summary:
-      "Comprehensive onboarding dossier for Individual and Corporate applicants, including facility requests, 2.5%/month statutory fee covenants, and the Republic of Uganda Guarantee & Indemnity Agreement.",
-    points: [
-      "Section A–C: Individual / Corporate identity, NIN, address, work, and loan tenor requirements",
-      "Section D: Statutory fees, 2.5% contractual monthly interest, and credit monitoring covenants",
-      "Section E: Applicant declaration, legal disclosures, and Credit Committee review checklist",
-      "Full Guarantee and Indemnity Agreement under Ugandan law for primary and secondary Guarantors",
-    ],
   },
 ];
 
@@ -710,20 +684,6 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                       </div>
                     </div>
 
-                    <p className="document-card__summary">{doc.summary}</p>
-
-                    <div className="document-card__provisions">
-                      <strong>Key Provisions &amp; Content:</strong>
-                      <ul>
-                        {doc.points.map((pt, i) => (
-                          <li key={i}>
-                            <Icon name="check" size={14} />
-                            <span>{pt}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
                     <div className="document-card__actions">
                       <a
                         className="button button--primary document-card__download-btn"
@@ -733,16 +693,6 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                       >
                         <Icon name="download" size={18} />
                         Download PDF ({doc.fileSize})
-                      </a>
-                      <a
-                        className="button button--outline document-card__view-btn"
-                        href={doc.filePath}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={`Preview ${doc.title} in new tab`}
-                      >
-                        <Icon name="eye" size={18} />
-                        Preview
                       </a>
                     </div>
                   </article>
