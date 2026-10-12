@@ -358,7 +358,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
     <div className={`site-shell site-shell--${page}`}>
       <header className="header">
         <div className="container header__inner">
-          <Logo height={52} width="auto" />
+          <Logo height={52} width="auto" responsiveNav />
           <button
             className="menu-button"
             type="button"

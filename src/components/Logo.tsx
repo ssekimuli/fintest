@@ -35,6 +35,8 @@ export interface LogoProps {
   href?: string;
   /** Custom image source override if needed */
   src?: string;
+  /** Responsive navigation support: switches to light-bg logo on mobile (<900px) */
+  responsiveNav?: boolean;
 }
 
 const formatSize = (value?: number | string): string | undefined => {
@@ -50,6 +52,7 @@ export const Logo: FC<LogoProps> = ({
   theme = "dark",
   badge = false,
   light = false,
+  responsiveNav = false,
   className = "",
   imageClassName = "",
   style,
@@ -99,14 +102,28 @@ export const Logo: FC<LogoProps> = ({
       style={containerStyles}
       aria-label="Titanium Financial Consultancy Co. Ltd - Journey to Financial Freedom"
     >
-      <img
-        src={chosenSrc}
-        alt={alt}
-        className={`logo__image ${imageClassName}`.trim()}
-        style={imgStyles}
-        loading="eager"
-        decoding="sync"
-      />
+      {responsiveNav ? (
+        <picture>
+          <source media="(max-width: 900px)" srcSet={LOGO_LIGHT_BG} />
+          <img
+            src={chosenSrc}
+            alt={alt}
+            className={`logo__image ${imageClassName}`.trim()}
+            style={imgStyles}
+            loading="eager"
+            decoding="sync"
+          />
+        </picture>
+      ) : (
+        <img
+          src={chosenSrc}
+          alt={alt}
+          className={`logo__image ${imageClassName}`.trim()}
+          style={imgStyles}
+          loading="eager"
+          decoding="sync"
+        />
+      )}
     </Link>
   );
 };
