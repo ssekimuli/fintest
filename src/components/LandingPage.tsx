@@ -9,6 +9,8 @@ type IconName =
   | "calculator"
   | "check"
   | "document"
+  | "download"
+  | "eye"
   | "headset"
   | "ledger"
   | "mail"
@@ -20,6 +22,19 @@ type IconName =
 
 const iconPaths: Record<IconName, ReactNode> = {
   arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
+  download: (
+    <>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </>
+  ),
+  eye: (
+    <>
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  ),
   building: (
     <>
       <path d="M4 21V7l8-4 8 4v14" />
@@ -341,7 +356,83 @@ const faqs: { category: string; question: string; answer: string; points?: strin
   },
 ];
 
-type PageName = "all" | "home" | "services" | "about" | "team" | "faq" | "contact";
+const clientDocuments: {
+  id: string;
+  title: string;
+  subtitle: string;
+  tag: string;
+  tierHighlight: string;
+  pages: string;
+  fileSize: string;
+  filePath: string;
+  downloadName: string;
+  icon: IconName;
+  summary: string;
+  points: string[];
+}[] = [
+  {
+    id: "free-agent-agreement",
+    title: "Free-Agent Savings and Investment Agreement",
+    subtitle: "Official 12-Month High-Yield Investor Contract",
+    tag: "Savings & Investment",
+    tierHighlight: "20% – 30% Annual Returns",
+    pages: "7 Pages",
+    fileSize: "133 KB",
+    filePath: "/documents/revised-free-agent-agreement.pdf",
+    downloadName: "Revised Free Agent Agreement.pdf",
+    icon: "target",
+    summary:
+      "Formal legal framework and terms under which Free-Agent Investors deposit savings with Titanium Financial Consultancy Co. Ltd to earn guaranteed annual interest returns.",
+    points: [
+      "Maximum savings cap: UGX 8,000,000 within any single financial year",
+      "Tier 1 (UGX 4.8M+ @ 30% p.a.) · Tier 2 (UGX 3.6M–4.79M @ 25% p.a.) · Tier 3 (UGX 2.4M–3.59M @ 20% p.a.)",
+      "Fixed 12-month tenure with documented early exit & penalty schedule",
+      "Designated banking, Next of Kin, witness execution, and dispute resolution clauses",
+    ],
+  },
+  {
+    id: "short-loan-agreement",
+    title: "Short Loan Agreement",
+    subtitle: "Direct Credit Agreement for Continuing Clients",
+    tag: "Loan Facility",
+    tierHighlight: "Rapid Cash / Mobile Disbursement",
+    pages: "1 Page",
+    fileSize: "185 KB",
+    filePath: "/documents/continuing-clients-loan-agreement.pdf",
+    downloadName: "Continuing Clients Loan Document Free.pdf",
+    icon: "calculator",
+    summary:
+      "Legally documented facility agreement for prospective and continuing borrowers seeking short-term cash credit with documented repayment terms and strict payment channels.",
+    points: [
+      "Clear documentation of principal sum, monthly payment amount, and loan tenure",
+      "Explicit late payment terms and transparent monthly interest calculation",
+      "Designated official transaction lines: 0744 846 643 / 0771 939 934 (Vivian Namakoola)",
+      "Sign-off sections for Borrower, Guarantor, Loan's Officer (Namutebi Winnie), and Treasurer (Namakoola Vivian Ritah)",
+    ],
+  },
+  {
+    id: "credit-application-and-guarantee",
+    title: "Client Registration & Credit Application Form",
+    subtitle: "Full Onboarding Dossier & Guarantee Agreement",
+    tag: "Credit Application & Guarantee",
+    tierHighlight: "Includes Guarantee & Indemnity Agreement",
+    pages: "7 Pages",
+    fileSize: "174 KB",
+    filePath: "/documents/client-registration-credit-application-form.pdf",
+    downloadName: "Loan Application Form Titanium.pdf",
+    icon: "shield",
+    summary:
+      "Comprehensive onboarding dossier for Individual and Corporate applicants, including facility requests, 2.5%/month statutory fee covenants, and the Republic of Uganda Guarantee & Indemnity Agreement.",
+    points: [
+      "Section A–C: Individual / Corporate identity, NIN, address, work, and loan tenor requirements",
+      "Section D: Statutory fees, 2.5% contractual monthly interest, and credit monitoring covenants",
+      "Section E: Applicant declaration, legal disclosures, and Credit Committee review checklist",
+      "Full Guarantee and Indemnity Agreement under Ugandan law for primary and secondary Guarantors",
+    ],
+  },
+];
+
+type PageName = "all" | "home" | "services" | "documents" | "about" | "team" | "faq" | "contact";
 
 function LandingPage({ page = "all" }: { page?: PageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -372,6 +463,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
             {[
               ["Home", "/"],
               ["Services", "/services"],
+              ["Documents", "/documents"],
               ["About", "/about"],
               ["Team", "/team"],
               ["FAQ", "/faq"],
@@ -581,6 +673,99 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               </div>
             </article>
           </div>
+          </section>
+        )}
+
+        {(page === "all" || page === "documents") && (
+          <section className="documents section" id="documents">
+            <div className="container">
+              <div className="section-heading section-heading--center">
+                <div className="eyebrow">
+                  <span />
+                  Official Documentation &amp; Downloads
+                </div>
+                <h2>Client Agreements, Application Forms &amp; Contracts</h2>
+                <p>
+                  Download and review official Titanium Financial agreements and credit application packages.
+                  Complete, sign, and submit in person at Rowan Village Mall or via our digital consultation channels.
+                </p>
+              </div>
+
+              <div className="documents__grid">
+                {clientDocuments.map((doc) => (
+                  <article className="document-card" key={doc.id}>
+                    <div className="document-card__header">
+                      <span className="document-card__tag">{doc.tag}</span>
+                      <span className="document-card__meta">{doc.pages} · {doc.fileSize}</span>
+                    </div>
+
+                    <div className="document-card__icon-title">
+                      <div className="document-card__icon">
+                        <Icon name={doc.icon} size={28} />
+                      </div>
+                      <div>
+                        <span className="document-card__tier">{doc.tierHighlight}</span>
+                        <h3>{doc.title}</h3>
+                        <small>{doc.subtitle}</small>
+                      </div>
+                    </div>
+
+                    <p className="document-card__summary">{doc.summary}</p>
+
+                    <div className="document-card__provisions">
+                      <strong>Key Provisions &amp; Content:</strong>
+                      <ul>
+                        {doc.points.map((pt, i) => (
+                          <li key={i}>
+                            <Icon name="check" size={14} />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="document-card__actions">
+                      <a
+                        className="button button--primary document-card__download-btn"
+                        href={doc.filePath}
+                        download={doc.downloadName}
+                        title={`Download ${doc.title}`}
+                      >
+                        <Icon name="download" size={18} />
+                        Download PDF ({doc.fileSize})
+                      </a>
+                      <a
+                        className="button button--outline document-card__view-btn"
+                        href={doc.filePath}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Preview ${doc.title} in new tab`}
+                      >
+                        <Icon name="eye" size={18} />
+                        Preview
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div className="documents__notice">
+                <div className="documents__notice-icon">
+                  <Icon name="shield" size={24} />
+                </div>
+                <div className="documents__notice-text">
+                  <strong>Need help completing your application?</strong>
+                  <p>
+                    You can print and fill these forms prior to visiting our office at Rowan Village Mall, Room Rubaga Boys.
+                    Our documentation officers are also available to guide you through required attachments (National ID, URSB certificates, trading licenses).
+                  </p>
+                </div>
+                <Link className="button button--outline" to="/contact">
+                  Contact Document Support
+                  <Icon name="arrow" size={16} />
+                </Link>
+              </div>
+            </div>
           </section>
         )}
 
@@ -846,6 +1031,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
             <strong>Explore</strong>
             <Link to="/">Home</Link>
             <Link to="/services">Services</Link>
+            <Link to="/documents">Client Documents &amp; Forms</Link>
             <Link to="/about">About us</Link>
             <Link to="/team">Our team</Link>
             <Link to="/faq">FAQ</Link>
