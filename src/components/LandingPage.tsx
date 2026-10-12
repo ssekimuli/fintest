@@ -419,6 +419,24 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
     event.currentTarget.reset();
   };
 
+  const handleDocumentDownload = async (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    doc: (typeof clientDocuments)[number]
+  ) => {
+    e.preventDefault();
+    try {
+      const { documentPdfBase64, downloadPdfBlob } = await import("../data/documentPdfData");
+      const base64Data = documentPdfBase64[doc.id];
+      if (base64Data) {
+        downloadPdfBlob(base64Data, doc.downloadName);
+        return;
+      }
+    } catch (err) {
+      console.warn("PDF dynamic load failed, falling back to direct URL", err);
+    }
+    window.open(doc.filePath, "_blank");
+  };
+
   return (
     <div className={`site-shell site-shell--${page}`}>
       <header className="header">
@@ -689,6 +707,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                         className="button button--primary document-card__download-btn"
                         href={doc.filePath}
                         download={doc.downloadName}
+                        onClick={(e) => handleDocumentDownload(e, doc)}
                         title={`Download ${doc.title}`}
                       >
                         <Icon name="download" size={18} />
