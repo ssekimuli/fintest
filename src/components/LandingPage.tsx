@@ -606,7 +606,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                 </span>
                 <span>
                   <small>Based at</small>
-                  <strong>Rowan Village Mall</strong>
+                  <strong>Rowan Village Mall, Room Rubaga Boys</strong>
                 </span>
               </div>
               <Link className="text-link" to="/contact">
@@ -780,7 +780,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                     </span>
                     <span>
                       <small>Visit us</small>
-                      <strong>Rowan Village Mall</strong>
+                      <strong>Rowan Village Mall, Room Rubaga Boys</strong>
                       <em>Along Najjera-Buwate Road, Uganda</em>
                     </span>
                   </div>
@@ -862,7 +862,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
             <strong>Get in touch</strong>
             <a href="tel:+256771939934">0771 939 934 / 0744 846 643</a>
             <a href="mailto:titaniumfinances23@gmail.com">titaniumfinances23@gmail.com</a>
-            <span>Rowan Village Mall, along Najjera-Buwate Road, Uganda</span>
+            <span>Rowan Village Mall, Room Rubaga Boys, along Najjera-Buwate Road, Uganda</span>
           </div>
         </div>
         <div className="container footer__bottom">
