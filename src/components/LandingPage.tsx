@@ -1,417 +1,19 @@
-import { FormEvent, ReactNode, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router";
-import Logo from "./Logo";
-import managingDirectorImg from "../assets/managing-director.png";
+import Layout from "./Layout";
+import Icon from "./Icon";
+import {
+  services,
+  trustPoints,
+  team,
+  faqs,
+  clientDocuments,
+  ClientDocument,
+} from "../data/siteData";
 
-type IconName =
-  | "arrow"
-  | "building"
-  | "calculator"
-  | "check"
-  | "document"
-  | "download"
-  | "eye"
-  | "headset"
-  | "instagram"
-  | "ledger"
-  | "mail"
-  | "menu"
-  | "phone"
-  | "pin"
-  | "shield"
-  | "target";
-
-const iconPaths: Record<IconName, ReactNode> = {
-  arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
-  instagram: (
-    <>
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </>
-  ),
-  download: (
-    <>
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </>
-  ),
-  eye: (
-    <>
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-      <circle cx="12" cy="12" r="3" />
-    </>
-  ),
-  building: (
-    <>
-      <path d="M4 21V7l8-4 8 4v14" />
-      <path d="M9 21v-4h6v4M8 9h1m6 0h1M8 13h1m6 0h1M2 21h20" />
-    </>
-  ),
-  calculator: (
-    <>
-      <rect x="5" y="2" width="14" height="20" rx="2" />
-      <path d="M8 6h8v4H8zM8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
-    </>
-  ),
-  check: <path d="m5 12 4 4L19 6" />,
-  document: (
-    <>
-      <path d="M6 2h8l4 4v16H6zM14 2v5h5" />
-      <path d="M9 13h6M9 17h6M9 9h1" />
-    </>
-  ),
-  headset: (
-    <>
-      <path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v6H5a1 1 0 0 1-1-1zM20 14h-3v6h2a1 1 0 0 0 1-1z" />
-      <path d="M17 20c0 1.1-2.2 2-5 2" />
-    </>
-  ),
-  ledger: (
-    <>
-      <path d="M4 4h16v16H4zM8 2v4M16 2v4M4 9h16" />
-      <path d="M8 13h3M8 17h8M15 13h1" />
-    </>
-  ),
-  mail: (
-    <>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m3 7 9 6 9-6" />
-    </>
-  ),
-  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
-  phone: <path d="M5 4h4l2 5-2.5 1.5a15 15 0 0 0 5 5L15 13l5 2v4c0 1.1-.9 2-2 2C9.7 20.5 3.5 14.3 3 6a2 2 0 0 1 2-2Z" />,
-  pin: (
-    <>
-      <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
-      <circle cx="12" cy="10" r="2.5" />
-    </>
-  ),
-  shield: (
-    <>
-      <path d="M12 3 4.5 6v5.5c0 4.8 3.2 8 7.5 9.5 4.3-1.5 7.5-4.7 7.5-9.5V6z" />
-      <path d="m8.5 12 2.2 2.2 4.8-5" />
-    </>
-  ),
-  target: (
-    <>
-      <circle cx="12" cy="12" r="9" />
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 3v3M21 12h-3M12 21v-3M3 12h3" />
-    </>
-  ),
-};
-
-function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      height={size}
-      viewBox="0 0 24 24"
-      width={size}
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.8"
-    >
-      {iconPaths[name]}
-    </svg>
-  );
-}
-
-
-const services: {
-  icon: IconName;
-  number: string;
-  title: string;
-  description: string;
-  points: string[];
-  about: string;
-  deliverables: string[];
-}[] = [
-  {
-    icon: "calculator",
-    number: "01",
-    title: "Accounting & Financial Management",
-    description: "Reliable records, reporting, and financial support for stronger day-to-day decisions.",
-    points: ["Bookkeeping & reconciliations", "Financial reporting"],
-    about:
-      "We help businesses maintain accurate financial records and turn their financial activity into clear, decision-ready information that supports performance, planning, and sustainable growth.",
-    deliverables: [
-      "Accounting services and financial record preparation",
-      "Bookkeeping and financial reconciliations",
-      "Financial reporting and management support",
-      "Business performance and decision support",
-    ],
-  },
-  {
-    icon: "shield",
-    number: "02",
-    title: "Audit Services",
-    description: "Thorough financial reviews that improve record-keeping and strengthen internal controls.",
-    points: ["Financial record reviews", "Internal control support"],
-    about:
-      "Our audit-related services examine financial information and supporting documentation to identify gaps, improve record-keeping practices, and strengthen internal financial controls.",
-    deliverables: [
-      "Financial information and document examination",
-      "Financial record and process reviews",
-      "Internal financial control assessment",
-      "Practical record-keeping recommendations",
-    ],
-  },
-  {
-    icon: "document",
-    number: "03",
-    title: "Taxation & Statutory Compliance",
-    description: "Practical tax guidance and filing support that keeps statutory obligations manageable.",
-    points: ["Tax returns & EFRIS", "TIN & PRN support"],
-    about:
-      "We simplify tax and statutory compliance by preparing filings, supporting registrations, and guiding clients through electronic invoicing and payment processes.",
-    deliverables: [
-      "Tax consultancy and compliance support",
-      "Preparation and filing of tax returns",
-      "EFRIS e-invoicing and e-receipts assistance",
-      "TIN applications, PRN generation, and payment guidance",
-    ],
-  },
-  {
-    icon: "building",
-    number: "04",
-    title: "Business & Company Registration",
-    description: "End-to-end formalisation and documentation guidance for businesses and companies.",
-    points: ["URSB requirements", "KCCA licensing"],
-    about:
-      "We support entrepreneurs and businesses through registration, formalisation, documentation, and relevant regulatory or licensing processes.",
-    deliverables: [
-      "Business and company registration support",
-      "Formalisation and documentation assistance",
-      "URSB registration process guidance",
-      "KCCA and other licensing requirement support",
-    ],
-  },
-  {
-    icon: "ledger",
-    number: "05",
-    title: "Loan Application & Debt Restructuring",
-    description: "Structured support for borrowers preparing applications or managing existing debt.",
-    points: ["Loan documentation", "Repayment planning"],
-    about:
-      "We help prospective and existing borrowers prepare financial information, understand lending requirements, and create practical repayment or debt restructuring plans.",
-    deliverables: [
-      "Loan application and documentation assistance",
-      "Financial guidance for prospective borrowers",
-      "Debt restructuring and repayment planning",
-      "Collateral documentation guidance",
-    ],
-  },
-  {
-    icon: "target",
-    number: "06",
-    title: "Financial & Investment Consultancy",
-    description: "Objective guidance to align financial and investment decisions with your goals.",
-    points: ["Financial planning", "Investment consultations"],
-    about:
-      "We provide practical financial planning and investment consultations to help clients evaluate options, make informed decisions, and align opportunities with their objectives.",
-    deliverables: [
-      "Personal and business financial planning",
-      "Decision-support guidance",
-      "Investment option consultations",
-      "Goal and opportunity alignment",
-    ],
-  },
-  {
-    icon: "calculator",
-    number: "07",
-    title: "Money Lending",
-    description: "Structured short-term lending with clear documentation and repayment arrangements.",
-    points: ["One-month facilities", "Documented repayment terms"],
-    about:
-      "We provide money-lending services subject to applicable laws, licensing, assessment, and internal procedures, with clear loan documentation and repayment arrangements.",
-    deliverables: [
-      "Short-term loan assessment",
-      "Loan documentation support",
-      "Collateral and eligibility review",
-      "Repayment arrangement guidance",
-    ],
-  },
-  {
-    icon: "building",
-    number: "08",
-    title: "Land & Property Management",
-    description: "Practical support for property management, land valuation, and documentation processes.",
-    points: ["Property management", "Land valuation"],
-    about:
-      "We support property owners with management needs, valuation services, and guidance through relevant land documentation and administrative processes.",
-    deliverables: [
-      "Property management support",
-      "Land valuation services",
-      "Land-related documentation guidance",
-      "Process and administrative support",
-    ],
-  },
-];
-
-const trustPoints: { icon: IconName; title: string; description: string }[] = [
-  {
-    icon: "shield",
-    title: "Our Vision",
-    description:
-      "To become a trusted and leading provider of financial consultancy and integrated business solutions in Uganda and beyond.",
-  },
-  {
-    icon: "target",
-    title: "Our Mission",
-    description:
-      "To empower individuals and businesses through accessible, professional, and reliable financial consultancy and business support.",
-  },
-  {
-    icon: "headset",
-    title: "Our Core Values",
-    description: "Professionalism, integrity, reliability, confidentiality, accountability, and client focus.",
-  },
-];
-
-const team = [
-  {
-    id: "managing-director",
-    icon: "target" as IconName,
-    name: "Namakoola Vivian Ritah",
-    role: "Managing Director",
-    specialty: "Leadership · Strategic direction · Operations · Service delivery · Growth",
-    image: managingDirectorImg,
-  },
-  {
-    id: "director-accounting-finance-taxation",
-    icon: "calculator" as IconName,
-    name: "Accounting, Finance & Taxation",
-    role: "Director",
-    specialty: "Accounting · Financial management · Taxation services",
-  },
-  {
-    id: "director-lending-land-property",
-    icon: "building" as IconName,
-    name: "Money Lending, Land & Property",
-    role: "Director",
-    specialty: "Money lending · Land services · Property management",
-  },
-];
-
-const faqs: { category: string; question: string; answer: string; points?: string[] }[] = [
-  {
-    category: "Loans",
-    question: "What are the loan interest rates and available amounts?",
-    answer:
-      "When you reach out with your requested amount, our lending team will guide you on current facility availability, applicable terms, and customized repayment schedules based on your specific requirements.",
-  },
-  {
-    category: "Loans",
-    question: "Which forms of identification are accepted?",
-    answer:
-      "We accept national IDs and passports. In some cases, an LC letter may also be accepted.",
-  },
-  {
-    category: "Loans",
-    question: "What collateral and supporting documents are accepted?",
-    answer:
-      "We accept land titles and other valuable items equal to the loan amount. Depending on the facility, an employment letter, certificate of incorporation, or trading license may also be required.",
-  },
-  {
-    category: "Loans",
-    question: "What is the loan duration?",
-    answer:
-      "Loans are issued strictly on a one-month basis, subject to assessment, documentation, and the agreed repayment arrangement.",
-  },
-  {
-    category: "Loans",
-    question: "How long does loan processing take?",
-    answer:
-      "Loan processing typically takes 3 to 7 working days after the required information and documents have been submitted.",
-  },
-  {
-    category: "Free-Agent Investment",
-    question: "What is the minimum investment and when is it due?",
-    answer:
-      "The minimum investment is UGX 200,000 per month. It may be paid as a lump sum or through payments completed within the first 5 days of the month.",
-  },
-  {
-    category: "Free-Agent Investment",
-    question: "What is the investment period and late-payment policy?",
-    answer:
-      "The minimum investment period to maturity is one year. A penalty is incurred when an investment is not made on time.",
-  },
-  {
-    category: "Free-Agent Investment",
-    question: "What are the annual investment return tiers?",
-    answer: "Annual returns are determined by the total qualifying investment amount.",
-    points: [
-      "Tier 1 — UGX 4,800,000 and above: 30% returns per year",
-      "Tier 2 — UGX 3,600,000 to 4,799,999: 25% returns per year",
-      "Tier 3 — UGX 2,400,000 to 3,599,999: 20% returns per year",
-    ],
-  },
-  {
-    category: "Free-Agent Investment",
-    question: "What is required to become an investor?",
-    answer: "A valid form of identification is required to complete investor onboarding.",
-  },
-];
-
-const clientDocuments: {
-  id: string;
-  title: string;
-  subtitle: string;
-  tag: string;
-  tierHighlight: string;
-  pages: string;
-  fileSize: string;
-  filePath: string;
-  downloadName: string;
-  icon: IconName;
-}[] = [
-  {
-    id: "free-agent-agreement",
-    title: "Free-Agent Savings and Investment Agreement",
-    subtitle: "Official 12-Month High-Yield Investor Contract",
-    tag: "Savings & Investment",
-    tierHighlight: "20% – 30% Annual Returns",
-    pages: "7 Pages",
-    fileSize: "133 KB",
-    filePath: "/documents/revised-free-agent-agreement.pdf",
-    downloadName: "Revised Free Agent Agreement.pdf",
-    icon: "target",
-  },
-  {
-    id: "short-loan-agreement",
-    title: "Short Loan Agreement",
-    subtitle: "Direct Credit Agreement for Continuing Clients",
-    tag: "Loan Facility",
-    tierHighlight: "Rapid Cash / Mobile Disbursement",
-    pages: "1 Page",
-    fileSize: "185 KB",
-    filePath: "/documents/continuing-clients-loan-agreement.pdf",
-    downloadName: "Continuing Clients Loan Document Free.pdf",
-    icon: "calculator",
-  },
-  {
-    id: "credit-application-and-guarantee",
-    title: "Client Registration & Credit Application Form",
-    subtitle: "Full Onboarding Dossier & Guarantee Agreement",
-    tag: "Credit Application & Guarantee",
-    tierHighlight: "Includes Guarantee & Indemnity Agreement",
-    pages: "7 Pages",
-    fileSize: "174 KB",
-    filePath: "/documents/client-registration-credit-application-form.pdf",
-    downloadName: "Loan Application Form Titanium.pdf",
-    icon: "shield",
-  },
-];
-
-type PageName = "all" | "home" | "services" | "documents" | "about" | "team" | "faq" | "contact";
+export type PageName = "all" | "home" | "services" | "documents" | "about" | "team" | "faq" | "contact";
 
 function LandingPage({ page = "all" }: { page?: PageName }) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState(0);
 
@@ -423,7 +25,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
 
   const handleDocumentDownload = async (
     e: React.MouseEvent<HTMLAnchorElement>,
-    doc: (typeof clientDocuments)[number]
+    doc: ClientDocument
   ) => {
     e.preventDefault();
     try {
@@ -440,154 +42,118 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
   };
 
   return (
-    <div className={`site-shell site-shell--${page}`}>
-      <header className="header">
-        <div className="container header__inner">
-          <Logo height={52} width="auto" responsiveNav />
-          <button
-            className="menu-button"
-            type="button"
-            aria-expanded={menuOpen}
-            aria-label="Toggle navigation"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <Icon name="menu" />
-          </button>
-          <nav className={`nav ${menuOpen ? "nav--open" : ""}`} aria-label="Primary navigation">
-            {[
-              ["Home", "/"],
-              ["Services", "/services"],
-              ["Documents", "/documents"],
-              ["About", "/about"],
-              ["Team", "/team"],
-              ["FAQ", "/faq"],
-              ["Contact", "/contact"],
-            ].map(([label, href]) => (
-              <Link key={label} to={href} onClick={() => setMenuOpen(false)}>
-                {label}
-              </Link>
-            ))}
-            <Link className="button button--primary nav__cta" to="/contact" onClick={() => setMenuOpen(false)}>
-              Get Consultation
-              <Icon name="arrow" size={18} />
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <Layout pageName={page}>
+      {(page === "all" || page === "home") && (
+        <section className="hero" id="home">
+          <div className="hero__bg" aria-hidden="true">
+            <img
+              src="https://images.unsplash.com/photo-1512403754473-27835f7b9984?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1920"
+              alt=""
+              className="hero__bg-img"
+            />
+            <div className="hero__overlay" />
+            <div className="hero__glow hero__glow--1" />
+            <div className="hero__glow hero__glow--2" />
+          </div>
 
-      <main>
-        {(page === "all" || page === "home") && (
-          <section className="hero" id="home">
-            <div className="hero__bg" aria-hidden="true">
-              <img
-                src="https://images.unsplash.com/photo-1512403754473-27835f7b9984?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1920"
-                alt=""
-                className="hero__bg-img"
-              />
-              <div className="hero__bg-overlay" />
-              <div className="hero__bg-pattern" />
-              <div className="hero__glow hero__glow--1" />
-              <div className="hero__glow hero__glow--2" />
+          <div className="container hero__grid">
+            <div className="hero__content">
+              <div className="eyebrow eyebrow--light">
+                <span />
+                Journey to Financial Freedom
+              </div>
+              <h1>
+                Your Trusted Partner in <em>Financial Growth</em> &amp; Compliance
+              </h1>
+              <p className="hero__lead">
+                Accessible financial consultancy and integrated business support for individuals and businesses
+                across Uganda—built around sound management, compliance, growth, and long-term sustainability.
+              </p>
+              <div className="hero__actions">
+                <Link className="button button--primary button--large" to="/services">
+                  Explore Our Services
+                  <Icon name="arrow" size={19} />
+                </Link>
+              </div>
+              <div className="hero__proof">
+                <div className="proof__avatars" aria-hidden="true">
+                  <span>TF</span>
+                  <span>AC</span>
+                  <span>+</span>
+                </div>
+                <div>
+                  <strong>Established 7 March 2023</strong>
+                  <span>Serving individuals and businesses in Uganda</span>
+                </div>
+              </div>
             </div>
 
-            <div className="container hero__grid">
-              <div className="hero__content">
-                <div className="eyebrow eyebrow--light">
-                  <span />
-                  Journey to Financial Freedom
+            <div className="hero__visual">
+              <div className="hero__card">
+                <div className="hero__card-header">
+                  <span className="hero__card-badge">
+                    <span className="hero__card-dot" />
+                    Regulated Advisory · Uganda
+                  </span>
+                  <span className="hero__card-stat-mini">Kampala, UG</span>
                 </div>
-                <h1>
-                  Your Trusted Partner in <em>Financial Growth</em> &amp; Compliance
-                </h1>
-                <p className="hero__lead">
-                  Accessible financial consultancy and integrated business support for individuals and businesses
-                  across Uganda—built around sound management, compliance, growth, and long-term sustainability.
+
+                <h3 className="hero__card-title">Institutional Financial Solutions</h3>
+                <p className="hero__card-subtitle">
+                  End-to-end consultancy designed for sustainable business operations and compliance.
                 </p>
-                <div className="hero__actions">
-                  <Link className="button button--primary button--large" to="/services">
-                    Explore Our Services
-                    <Icon name="arrow" size={19} />
-                  </Link>
-                </div>
-                <div className="hero__proof">
-                  <div className="proof__avatars" aria-hidden="true">
-                    <span>TF</span>
-                    <span>AC</span>
-                    <span>+</span>
-                  </div>
-                  <div>
-                    <strong>Established 7 March 2023</strong>
-                    <span>Serving individuals and businesses in Uganda</span>
-                  </div>
-                </div>
-              </div>
 
-              <div className="hero__visual">
-                <div className="hero__card">
-                  <div className="hero__card-header">
-                    <span className="hero__card-badge">
-                      <span className="hero__card-dot" />
-                      Regulated Advisory · Uganda
+                <div className="hero__card-features">
+                  <div className="hero__feature-item">
+                    <div className="hero__feature-icon">
+                      <Icon name="calculator" size={20} />
+                    </div>
+                    <div className="hero__feature-text">
+                      <strong>Accounting &amp; Tax Compliance</strong>
+                      <span>Bookkeeping, URA returns &amp; EFRIS assistance</span>
+                    </div>
+                  </div>
+
+                  <div className="hero__feature-item">
+                    <div className="hero__feature-icon">
+                      <Icon name="ledger" size={20} />
+                    </div>
+                    <div className="hero__feature-text">
+                      <strong>Credit &amp; Debt Restructuring</strong>
+                      <span>Short-term lending facilities &amp; repayment plans</span>
+                    </div>
+                  </div>
+
+                  <div className="hero__feature-item">
+                    <div className="hero__feature-icon">
+                      <Icon name="building" size={20} />
+                    </div>
+                    <div className="hero__feature-text">
+                      <strong>Business Formalisation</strong>
+                      <span>URSB registration, KCCA licenses &amp; land advisory</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="hero__card-footer">
+                  <div className="hero__card-trust">
+                    <span className="hero__card-trust-icon">
+                      <Icon name="shield" size={18} />
                     </span>
-                    <span className="hero__card-stat-mini">Kampala, UG</span>
-                  </div>
-
-                  <h3 className="hero__card-title">Institutional Financial Solutions</h3>
-                  <p className="hero__card-subtitle">
-                    End-to-end consultancy designed for sustainable business operations and compliance.
-                  </p>
-
-                  <div className="hero__card-features">
-                    <div className="hero__feature-item">
-                      <div className="hero__feature-icon">
-                        <Icon name="calculator" size={20} />
-                      </div>
-                      <div className="hero__feature-text">
-                        <strong>Accounting &amp; Tax Compliance</strong>
-                        <span>Bookkeeping, URA returns &amp; EFRIS assistance</span>
-                      </div>
-                    </div>
-
-                    <div className="hero__feature-item">
-                      <div className="hero__feature-icon">
-                        <Icon name="ledger" size={20} />
-                      </div>
-                      <div className="hero__feature-text">
-                        <strong>Credit &amp; Debt Restructuring</strong>
-                        <span>Short-term lending facilities &amp; repayment plans</span>
-                      </div>
-                    </div>
-
-                    <div className="hero__feature-item">
-                      <div className="hero__feature-icon">
-                        <Icon name="building" size={20} />
-                      </div>
-                      <div className="hero__feature-text">
-                        <strong>Business Formalisation</strong>
-                        <span>URSB registration, KCCA licenses &amp; land advisory</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="hero__card-footer">
-                    <div className="hero__card-trust">
-                      <span className="hero__card-trust-icon">
-                        <Icon name="shield" size={18} />
-                      </span>
-                      <div>
-                        <strong>Built on Trust &amp; Precision</strong>
-                        <small>Strict confidentiality &amp; professional accountability</small>
-                      </div>
+                    <div>
+                      <strong>Built on Trust &amp; Precision</strong>
+                      <small>Strict confidentiality &amp; professional accountability</small>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {(page === "all" || page === "services") && (
-          <section className="services section" id="services">
+      {(page === "all" || page === "services") && (
+        <section className="services section" id="services">
           <div className="container">
             <div className="section-heading section-heading--center">
               <div className="eyebrow">
@@ -664,81 +230,83 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               </div>
             </article>
           </div>
-          </section>
-        )}
+        </section>
+      )}
 
-        {(page === "all" || page === "documents") && (
-          <section className="documents section" id="documents">
-            <div className="container">
-              <div className="section-heading section-heading--center">
-                <div className="eyebrow">
-                  <span />
-                  Official Documentation &amp; Downloads
-                </div>
-                <h2>Client Agreements, Application Forms &amp; Contracts</h2>
+      {(page === "all" || page === "documents") && (
+        <section className="documents section" id="documents">
+          <div className="container">
+            <div className="section-heading section-heading--center">
+              <div className="eyebrow">
+                <span />
+                Official Documentation &amp; Downloads
+              </div>
+              <h2>Client Agreements, Application Forms &amp; Contracts</h2>
+              <p>
+                Download and review official Titanium Financial agreements and credit application packages.
+                Complete, sign, and submit in person at Rowan Village Mall or via our digital consultation channels.
+              </p>
+            </div>
+
+            <div className="documents__grid">
+              {clientDocuments.map((doc) => (
+                <article className="document-card" key={doc.id}>
+                  <div className="document-card__header">
+                    <span className="document-card__tag">{doc.tag}</span>
+                    <span className="document-card__meta">
+                      {doc.pages} · {doc.fileSize}
+                    </span>
+                  </div>
+
+                  <div className="document-card__icon-title">
+                    <div className="document-card__icon">
+                      <Icon name={doc.icon} size={28} />
+                    </div>
+                    <div>
+                      <span className="document-card__tier">{doc.tierHighlight}</span>
+                      <h3>{doc.title}</h3>
+                      <small>{doc.subtitle}</small>
+                    </div>
+                  </div>
+
+                  <div className="document-card__actions">
+                    <a
+                      className="button button--primary document-card__download-btn"
+                      href={doc.filePath}
+                      download={doc.downloadName}
+                      onClick={(e) => handleDocumentDownload(e, doc)}
+                      title={`Download ${doc.title}`}
+                    >
+                      <Icon name="download" size={18} />
+                      Download PDF ({doc.fileSize})
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="documents__notice">
+              <div className="documents__notice-icon">
+                <Icon name="shield" size={24} />
+              </div>
+              <div className="documents__notice-text">
+                <strong>Need help completing your application?</strong>
                 <p>
-                  Download and review official Titanium Financial agreements and credit application packages.
-                  Complete, sign, and submit in person at Rowan Village Mall or via our digital consultation channels.
+                  You can print and fill these forms prior to visiting our office at Rowan Village Mall, Room Rubaga Boys.
+                  Our documentation officers are also available to guide you through required attachments (National ID, URSB certificates, trading licenses).
                 </p>
               </div>
-
-              <div className="documents__grid">
-                {clientDocuments.map((doc) => (
-                  <article className="document-card" key={doc.id}>
-                    <div className="document-card__header">
-                      <span className="document-card__tag">{doc.tag}</span>
-                      <span className="document-card__meta">{doc.pages} · {doc.fileSize}</span>
-                    </div>
-
-                    <div className="document-card__icon-title">
-                      <div className="document-card__icon">
-                        <Icon name={doc.icon} size={28} />
-                      </div>
-                      <div>
-                        <span className="document-card__tier">{doc.tierHighlight}</span>
-                        <h3>{doc.title}</h3>
-                        <small>{doc.subtitle}</small>
-                      </div>
-                    </div>
-
-                    <div className="document-card__actions">
-                      <a
-                        className="button button--primary document-card__download-btn"
-                        href={doc.filePath}
-                        download={doc.downloadName}
-                        onClick={(e) => handleDocumentDownload(e, doc)}
-                        title={`Download ${doc.title}`}
-                      >
-                        <Icon name="download" size={18} />
-                        Download PDF ({doc.fileSize})
-                      </a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              <div className="documents__notice">
-                <div className="documents__notice-icon">
-                  <Icon name="shield" size={24} />
-                </div>
-                <div className="documents__notice-text">
-                  <strong>Need help completing your application?</strong>
-                  <p>
-                    You can print and fill these forms prior to visiting our office at Rowan Village Mall, Room Rubaga Boys.
-                    Our documentation officers are also available to guide you through required attachments (National ID, URSB certificates, trading licenses).
-                  </p>
-                </div>
-                <Link className="button button--outline" to="/contact">
-                  Contact Document Support
-                  <Icon name="arrow" size={16} />
-                </Link>
-              </div>
+              <Link className="button button--outline" to="/contact">
+                Contact Document Support
+                <Icon name="arrow" size={16} />
+              </Link>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {(page === "all" || page === "about") && (
-          <section className="about section" id="about">
+      {(page === "all" || page === "about") && (
+        <section className="about section" id="about">
           <div className="about__accent" />
           <div className="container about__grid">
             <div className="about__intro">
@@ -787,11 +355,11 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               </p>
             </div>
           </div>
-          </section>
-        )}
+        </section>
+      )}
 
-        {(page === "all" || page === "team") && (
-          <section className="team section" id="team">
+      {(page === "all" || page === "team") && (
+        <section className="team section" id="team">
           <div className="container">
             <div className="team__top">
               <div className="section-heading">
@@ -839,11 +407,11 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               </Link>
             </div>
           </div>
-          </section>
-        )}
+        </section>
+      )}
 
-        {(page === "all" || page === "faq") && (
-          <section className="faq section" id="faq">
+      {(page === "all" || page === "faq") && (
+        <section className="faq section" id="faq">
           <div className="faq__accent" />
           <div className="container faq__grid">
             <div className="faq__intro">
@@ -889,11 +457,11 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               ))}
             </div>
           </div>
-          </section>
-        )}
+        </section>
+      )}
 
-        {(page === "all" || page === "contact") && (
-          <section className="contact section" id="contact">
+      {(page === "all" || page === "contact") && (
+        <section className="contact section" id="contact">
           <div className="container">
             <div className="section-heading section-heading--center">
               <div className="eyebrow">
@@ -998,68 +566,9 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               </form>
             </div>
           </div>
-          </section>
-        )}
-      </main>
-
-      <footer className="footer">
-        <div className="container footer__grid">
-          <div className="footer__brand">
-            <Logo light height={62} width="auto" />
-            <p>Clear advice. Compliant finances. Confident growth.</p>
-            <div className="footer__socials">
-              <a
-                href="https://instagram.com/tfccl25?xtok=d3pmOHdkamMwcXgw&utm_source=qr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer__social-link"
-                aria-label="Instagram @tfccl25"
-                title="Follow us on Instagram @tfccl25"
-              >
-                <Icon name="instagram" size={18} />
-                <span>@tfccl25</span>
-              </a>
-            </div>
-          </div>
-          <div className="footer__links">
-            <strong>Explore</strong>
-            <Link to="/">Home</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/documents">Client Documents &amp; Forms</Link>
-            <Link to="/about">About us</Link>
-            <Link to="/team">Our team</Link>
-            <Link to="/faq">FAQ</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-          <div className="footer__links">
-            <strong>Services</strong>
-            <Link to="/services">Accounting &amp; Audit</Link>
-            <Link to="/services">Taxation &amp; Filing</Link>
-            <Link to="/services">Lending &amp; Investment</Link>
-            <Link to="/services">Land &amp; Property</Link>
-          </div>
-          <div className="footer__contact">
-            <strong>Get in touch</strong>
-            <a href="tel:+256771939934">0771 939 934 / 0744 846 643</a>
-            <a href="mailto:titaniumfinances23@gmail.com">titaniumfinances23@gmail.com</a>
-            <a
-              href="https://instagram.com/tfccl25?xtok=d3pmOHdkamMwcXgw&utm_source=qr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer__contact-social"
-            >
-              <Icon name="instagram" size={15} />
-              <span>Instagram: @tfccl25</span>
-            </a>
-            <span>Rowan Village Mall, Room Rubaga Boys, along Najjera-Buwate Road, Uganda</span>
-          </div>
-        </div>
-        <div className="container footer__bottom">
-          <span>© {new Date().getFullYear()} Titanium Financial Consultancy Co. Ltd. All rights reserved.</span>
-          <span>Financial guidance is provided based on the information available at the time of consultation.</span>
-        </div>
-      </footer>
-    </div>
+        </section>
+      )}
+    </Layout>
   );
 }
 
