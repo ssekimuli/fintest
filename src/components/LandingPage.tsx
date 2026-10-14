@@ -12,6 +12,7 @@ type IconName =
   | "download"
   | "eye"
   | "headset"
+  | "instagram"
   | "ledger"
   | "mail"
   | "menu"
@@ -22,6 +23,13 @@ type IconName =
 
 const iconPaths: Record<IconName, ReactNode> = {
   arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
+  instagram: (
+    <>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </>
+  ),
   download: (
     <>
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -293,15 +301,9 @@ const team = [
 const faqs: { category: string; question: string; answer: string; points?: string[] }[] = [
   {
     category: "Loans",
-    question: "What are the loan interest rates and tiers?",
+    question: "What are the loan interest rates and available amounts?",
     answer:
-      "Interest and fees are charged monthly according to the amount borrowed.",
-    points: [
-      "Tier 1 — UGX 10,000,000 and above: 6% per month",
-      "Tier 2 — UGX 5,000,000 to 9,999,999: 8% per month",
-      "Tier 3 — UGX 1,000,000 to 4,999,999: 10% per month",
-      "Tier 4 — UGX 100,000 to 999,999: 12% per month",
-    ],
+      "When you reach out with your requested amount, our lending team will guide you on current facility availability, applicable terms, and customized repayment schedules based on your specific requirements.",
   },
   {
     category: "Loans",
@@ -502,12 +504,9 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                   across Uganda—built around sound management, compliance, growth, and long-term sustainability.
                 </p>
                 <div className="hero__actions">
-                  <Link className="button button--primary button--large" to="/contact">
-                    Schedule Consultation
+                  <Link className="button button--primary button--large" to="/services">
+                    Explore Our Services
                     <Icon name="arrow" size={19} />
-                  </Link>
-                  <Link className="button button--outline button--large" to="/services">
-                    View Services
                   </Link>
                 </div>
                 <div className="hero__proof">
@@ -855,7 +854,7 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               <h2>Clear answers before we get started.</h2>
               <p>
                 Review key information about our one-month loan facilities and Free-Agent Investment offering,
-                including eligibility, timelines, rates, and return tiers.
+                including eligibility, documentation, timelines, and return tiers.
               </p>
               <div className="faq__support">
                 <span className="faq__support-icon">
@@ -938,6 +937,19 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
                       <em>Along Najjera-Buwate Road, Uganda</em>
                     </span>
                   </div>
+                  <a
+                    href="https://instagram.com/tfccl25?xtok=d3pmOHdkamMwcXgw&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="contact__icon">
+                      <Icon name="instagram" size={21} />
+                    </span>
+                    <span>
+                      <small>Follow us on Instagram</small>
+                      <strong>@tfccl25</strong>
+                    </span>
+                  </a>
                 </div>
               </div>
               <form className="contact__form" onSubmit={handleSubmit}>
@@ -995,6 +1007,19 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
           <div className="footer__brand">
             <Logo light height={62} width="auto" />
             <p>Clear advice. Compliant finances. Confident growth.</p>
+            <div className="footer__socials">
+              <a
+                href="https://instagram.com/tfccl25?xtok=d3pmOHdkamMwcXgw&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social-link"
+                aria-label="Instagram @tfccl25"
+                title="Follow us on Instagram @tfccl25"
+              >
+                <Icon name="instagram" size={18} />
+                <span>@tfccl25</span>
+              </a>
+            </div>
           </div>
           <div className="footer__links">
             <strong>Explore</strong>
@@ -1017,6 +1042,15 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
             <strong>Get in touch</strong>
             <a href="tel:+256771939934">0771 939 934 / 0744 846 643</a>
             <a href="mailto:titaniumfinances23@gmail.com">titaniumfinances23@gmail.com</a>
+            <a
+              href="https://instagram.com/tfccl25?xtok=d3pmOHdkamMwcXgw&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer__contact-social"
+            >
+              <Icon name="instagram" size={15} />
+              <span>Instagram: @tfccl25</span>
+            </a>
             <span>Rowan Village Mall, Room Rubaga Boys, along Najjera-Buwate Road, Uganda</span>
           </div>
         </div>

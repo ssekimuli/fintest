@@ -1843,6 +1843,46 @@ a {
   line-height: 1.7;
 }
 
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.footer__social-link:hover {
+  background: #e1306c;
+  border-color: #e1306c;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.footer__contact-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.2s ease;
+}
+
+.footer__contact-social:hover {
+  color: #ff7b84 !important;
+}
+
 .footer__links,
 .footer__contact {
   display: flex;
