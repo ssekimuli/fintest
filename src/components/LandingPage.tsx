@@ -51,7 +51,8 @@ function LandingPage({ page = "all" }: { page?: PageName }) {
               alt=""
               className="hero__bg-img"
             />
-            <div className="hero__overlay" />
+            <div className="hero__bg-overlay" />
+            <div className="hero__bg-pattern" />
             <div className="hero__glow hero__glow--1" />
             <div className="hero__glow hero__glow--2" />
           </div>
