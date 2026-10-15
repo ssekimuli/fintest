@@ -1,5 +1,6 @@
 import { IconName } from "../components/Icon";
 import managingDirectorImg from "../assets/managing-director.png";
+import odongoStephenImg from "../assets/odongo-stephen.jpg";
 
 export interface ServiceItem {
   icon: IconName;
@@ -181,9 +182,10 @@ export const team: TeamMember[] = [
   {
     id: "director-accounting-finance-taxation",
     icon: "calculator",
-    name: "Accounting, Finance & Taxation",
-    role: "Director",
+    name: "Odongo Stephen",
+    role: "Director Finance Accounting & Taxation",
     specialty: "Accounting · Financial management · Taxation services",
+    image: odongoStephenImg,
   },
   {
     id: "director-lending-land-property",
