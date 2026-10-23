@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
 import siteConfiguration from './.figma/make/site.json'
+import { generateSitemapXml } from './src/data/sitemapCore.js'
 
 
 // Vite config — https://vitejs.dev/config/
@@ -18,8 +19,9 @@ export default defineConfig(({ mode }) => {
       minify: !emitSourcemaps,
     },
     plugins: [
-react(),
+      react(),
       tailwindcss(),
+      dynamicSitemapPlugin(),
       figmaSiteConfiguration(siteConfiguration),
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
@@ -46,6 +48,36 @@ react(),
     },
   }
 })
+
+/**
+ * Dynamically serves /sitemap.xml with 2,156 URLs on the Vite server and emits to build bundle.
+ */
+function dynamicSitemapPlugin(): Plugin {
+  return {
+    name: 'dynamic-sitemap',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const url = req.url?.split('?')[0]
+        if (url === '/sitemap.xml') {
+          const xml = generateSitemapXml()
+          res.setHeader('Content-Type', 'application/xml; charset=utf-8')
+          res.setHeader('Cache-Control', 'no-cache')
+          res.end(xml)
+          return
+        }
+        next()
+      })
+    },
+    generateBundle() {
+      const xml = generateSitemapXml()
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: xml,
+      })
+    },
+  }
+}
 
 type FigmaSiteConfiguration = {
   title?: string
