@@ -1,6 +1,7 @@
 import { IconName } from "../components/Icon";
 import managingDirectorImg from "../assets/managing-director.png";
 import odongoStephenImg from "../assets/odongo-stephen.jpg";
+import winnieImg from "../assets/winnie.png";
 
 export interface ServiceItem {
   icon: IconName;
@@ -193,9 +194,11 @@ export const team: TeamMember[] = [
   {
     id: "director-lending-land-property",
     icon: "building",
-    name: "Money Lending, Land & Property",
-    role: "Director",
+    name: "Winnie",
+    role: "Director Money Lending, Land & Property",
     specialty: "Money lending · Land services · Property management",
+    email: "winnie@titaniumfinancialconsultancy.com",
+    image: winnieImg,
   },
 ];
 

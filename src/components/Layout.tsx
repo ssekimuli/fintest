@@ -32,7 +32,7 @@ const PAGE_DEFAULTS: Record<string, { title: string; description: string }> = {
   team: {
     title: "Executive Leadership & Financial Specialists",
     description:
-      "Meet our leadership team: Managing Director Namakoola Vivian Ritah and Director of Finance, Accounting & Taxation Odongo Stephen.",
+      "Meet our leadership team: Managing Director Namakoola Vivian Ritah, Director of Finance, Accounting & Taxation Odongo Stephen, and Director of Money Lending, Land & Property Winnie.",
   },
   faq: {
     title: "Frequently Asked Questions · Loans & Investment Tiers",
