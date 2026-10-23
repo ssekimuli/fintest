@@ -1,8 +1,8 @@
-import { generateSitemapXml } from '../src/data/sitemapCore.js';
+import { generateDynamicSitemapXml } from '../src/data/keywords.ts';
 
 export default function handler(req, res) {
   try {
-    const xml = generateSitemapXml();
+    const xml = generateDynamicSitemapXml();
     res.setHeader('Content-Type', 'application/xml; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=43200');
     return res.status(200).send(xml);

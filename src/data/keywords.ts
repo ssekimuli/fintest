@@ -1,2 +1,2 @@
-export * from "./keyword";
-export { default } from "./keyword";
+export * from "./keyword.ts";
+export { default } from "./keyword.ts";

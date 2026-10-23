@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
 import siteConfiguration from './.figma/make/site.json'
-import { generateSitemapXml } from './src/data/sitemapCore.js'
+import { generateDynamicSitemapXml } from './src/data/keywords.ts'
 
 
 // Vite config — https://vitejs.dev/config/
@@ -59,7 +59,7 @@ function dynamicSitemapPlugin(): Plugin {
       server.middlewares.use((req, res, next) => {
         const url = req.url?.split('?')[0]
         if (url === '/sitemap.xml') {
-          const xml = generateSitemapXml()
+          const xml = generateDynamicSitemapXml()
           res.setHeader('Content-Type', 'application/xml; charset=utf-8')
           res.setHeader('Cache-Control', 'no-cache')
           res.end(xml)
@@ -69,7 +69,7 @@ function dynamicSitemapPlugin(): Plugin {
       })
     },
     generateBundle() {
-      const xml = generateSitemapXml()
+      const xml = generateDynamicSitemapXml()
       this.emitFile({
         type: 'asset',
         fileName: 'sitemap.xml',

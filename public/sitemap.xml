@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- ========================================================================================= -->
+<!-- DYNAMIC SITEMAP: Programmatically generated directly from src/data/keywords.ts            -->
+<!-- Single Source of Truth: Keyword Intelligence Matrix, Target Geographies & Programmatic SEO -->
+<!-- Total Indexed URLs: 2156                                                               -->
+<!-- Generated for Search Engines & AI Answer Engines (ChatGPT, Perplexity, Copilot, Gemini)   -->
+<!-- Runtime Serverless Handler: /api/sitemap                                                  -->
+<!-- Development Server: vite.config.ts dynamic sitemap middleware                             -->
+<!-- Last Updated: 2026-10-23                                                                  -->
+<!-- ========================================================================================= -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://titaniumfinancialconsultancy.com/</loc>
