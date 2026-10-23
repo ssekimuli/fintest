@@ -3,12 +3,12 @@ import Layout from "../components/Layout";
 import Icon from "../components/Icon";
 import SEOHead from "../components/SEOHead";
 import NotFoundPage from "./NotFoundPage";
-import { pseoItems } from "../data/pseoData";
+import { getPseoItem } from "../data/pseoEngine";
 import { findKeywordBySlug } from "../data/keyword";
 
 export default function PseoPage() {
   const { slug } = useParams<{ slug: string }>();
-  const item = pseoItems.find((p) => p.slug === slug);
+  const item = getPseoItem(slug);
 
   if (!item) {
     return <NotFoundPage />;
@@ -75,7 +75,9 @@ export default function PseoPage() {
     ],
   };
 
-  const relatedItems = pseoItems.filter((p) => item.relatedSlugs.includes(p.slug));
+  const relatedItems = item.relatedSlugs
+    .map((s) => getPseoItem(s))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
     <Layout pageName="pseo">
