@@ -194,7 +194,7 @@ export const team: TeamMember[] = [
   {
     id: "director-lending-land-property",
     icon: "building",
-    name: "Winnie",
+    name: "Namutebi Winnie",
     role: "Director Money Lending, Land & Property",
     specialty: "Money lending · Land services · Property management",
     email: "winnie@titaniumfinancialconsultancy.com",
