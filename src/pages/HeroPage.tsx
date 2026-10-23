@@ -9,8 +9,12 @@ export default function HeroPage() {
         <div className="hero__bg" aria-hidden="true">
           <img
             src="https://images.unsplash.com/photo-1512403754473-27835f7b9984?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=85&w=1920"
-            alt=""
+            alt="Titanium Financial Consultancy Kampala Office"
             className="hero__bg-img"
+            loading="eager"
+            fetchPriority="high"
+            width={1920}
+            height={1080}
           />
           <div className="hero__bg-overlay" />
           <div className="hero__bg-pattern" />

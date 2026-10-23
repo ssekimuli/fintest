@@ -135,6 +135,9 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
         }
         if (config.robots?.index === false) {
           tags.push({ tag: 'meta', attrs: { name: 'robots', content: 'noindex, nofollow' }, injectTo: 'head' })
+        } else {
+          tags.push({ tag: 'meta', attrs: { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }, injectTo: 'head' })
+          tags.push({ tag: 'link', attrs: { rel: 'canonical', href: 'https://titaniumfinancialconsultancy.com/' }, injectTo: 'head' })
         }
         if (favicon) {
           tags.push({ tag: 'link', attrs: { rel: 'icon', href: favicon }, injectTo: 'head' })

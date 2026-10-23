@@ -1,11 +1,14 @@
 {
-  "title": "Titanium Financial Consultancy | Journey to Financial Freedom",
-  "description": "This professional landing page connects potential clients with Titanium Financial Consultancy, offering services in accounting, auditing, and business registration.",
+  "title": "Titanium Financial Consultancy | Global Financial, Tax, Investment & Corporate Advisory",
+  "description": "Global financial consultancy operating across North America (USA, Canada), Europe, Philippines, Africa, and worldwide. Corporate accounting, international tax planning, company formation, and investment management.",
   "robots": {
-    "index": false
+    "index": true
+  },
+  "openGraph": {
+    "image": "https://titaniumfinancialconsultancy.com/logo-original.png"
   },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   }
-}
+}
