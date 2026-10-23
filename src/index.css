@@ -1352,6 +1352,29 @@ a {
   line-height: 1.6;
 }
 
+.team-card__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+  word-break: break-all;
+}
+
+.team-card__email:hover {
+  color: var(--crimson);
+  text-decoration: underline;
+}
+
+.team-card__email svg {
+  flex-shrink: 0;
+  color: var(--crimson);
+}
+
 .team__note {
   display: flex;
   align-items: center;

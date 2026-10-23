@@ -167,6 +167,7 @@ export interface TeamMember {
   name: string;
   role: string;
   specialty: string;
+  email?: string;
   image?: string;
 }
 
@@ -177,6 +178,7 @@ export const team: TeamMember[] = [
     name: "Namakoola Vivian Ritah",
     role: "Managing Director",
     specialty: "Leadership · Strategic direction · Operations · Service delivery · Growth",
+    email: "vivianritah@titaniumfinancialconsultancy.com",
     image: managingDirectorImg,
   },
   {
@@ -185,6 +187,7 @@ export const team: TeamMember[] = [
     name: "Odongo Stephen",
     role: "Director Finance Accounting & Taxation",
     specialty: "Accounting · Financial management · Taxation services",
+    email: "sodongo@titaniumfinancialconsultancy.com",
     image: odongoStephenImg,
   },
   {

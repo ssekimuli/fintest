@@ -388,6 +388,12 @@ export default function HomePage() {
                   <span>{member.role}</span>
                   <h3>{member.name}</h3>
                   <p>{member.specialty}</p>
+                  {member.email && (
+                    <a className="team-card__email" href={`mailto:${member.email}`}>
+                      <Icon name="mail" size={13} />
+                      <span>{member.email}</span>
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
