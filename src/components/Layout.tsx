@@ -11,6 +11,7 @@ interface LayoutProps {
   description?: string;
   canonicalPath?: string;
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
+  showFooter?: boolean;
 }
 
 const PAGE_DEFAULTS: Record<string, { title: string; description: string }> = {
@@ -53,6 +54,7 @@ export default function Layout({
   description,
   canonicalPath,
   jsonLd,
+  showFooter = true,
 }: LayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -109,6 +111,7 @@ export default function Layout({
 
       <main>{children}</main>
 
+      {showFooter && (
       <footer className="footer">
         <div className="container footer__grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "32px" }}>
           <div className="footer__brand" style={{ gridColumn: "span 1" }}>
@@ -176,6 +179,7 @@ export default function Layout({
           <span>Financial guidance is provided based on the information available at the time of consultation.</span>
         </div>
       </footer>
+      )}
     </div>
   );
 }

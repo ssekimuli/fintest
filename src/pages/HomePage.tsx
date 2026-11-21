@@ -73,7 +73,7 @@ export default function HomePage() {
   }
 
   return (
-    <Layout pageName="all">
+    <Layout pageName="all" showFooter={activePage !== "home"}>
       <nav className="page-pager" aria-label="Home page sections">
         <div className="page-pager__controls">
           <button
