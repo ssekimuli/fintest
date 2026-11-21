@@ -124,7 +124,7 @@ export default function HomePage() {
                   <span>+</span>
                 </div>
                 <div>
-                  <strong>Established 7 March 2023</strong>
+                  <strong>Established 7 March 2023 </strong>
                   <span>Serving individuals and businesses in Uganda</span>
                 </div>
               </div>
