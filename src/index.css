@@ -1055,7 +1055,7 @@ a {
   position: relative;
   overflow: hidden;
   color: var(--white);
-  background: var(--navy);
+  background: var(--navy-soft);
 }
 
 .about::before {
