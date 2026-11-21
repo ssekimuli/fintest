@@ -202,7 +202,7 @@ a {
   min-height: 760px;
   padding-top: 86px;
   color: var(--white);
-  background: var(--navy-deep);
+  background: var(--navy-soft);
   overflow: hidden;
 }
 
@@ -229,8 +229,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 16, 38, 0.94) 0%, rgba(9, 20, 46, 0.88) 46%, rgba(15, 29, 64, 0.72) 75%, rgba(9, 20, 46, 0.9) 100%),
-    linear-gradient(180deg, rgba(7, 16, 38, 0.8) 0%, transparent 22%, transparent 72%, rgba(9, 20, 46, 1) 100%);
+    linear-gradient(90deg, rgba(28, 49, 91, 0.94) 0%, rgba(28, 49, 91, 0.88) 46%, rgba(83, 118, 165, 0.55) 75%, rgba(28, 49, 91, 0.9) 100%),
+    linear-gradient(180deg, rgba(28, 49, 91, 0.8) 0%, transparent 22%, transparent 72%, rgba(28, 49, 91, 1) 100%);
 }
 
 .hero__bg-pattern {
