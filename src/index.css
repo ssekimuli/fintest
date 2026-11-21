@@ -2525,8 +2525,8 @@ a {
 /* Home page: sections share the footer navy */
 .home-trust {
   padding: 72px 0;
-  background: var(--navy-deep);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface);
+  border-top: 1px solid var(--line);
 }
 
 .home-trust__grid {
@@ -2553,20 +2553,20 @@ a {
 
 .home-trust__item h3 {
   margin: 0 0 6px;
-  color: var(--white);
+  color: var(--ink);
   font-size: 1.05rem;
 }
 
 .home-trust__item p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.65;
 }
 
 .home-cta {
   padding: 0 0 96px;
-  background: var(--navy-deep);
+  background: var(--navy-soft);
   color: var(--white);
 }
 
