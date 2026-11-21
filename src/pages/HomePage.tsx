@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import Layout from "../components/Layout";
 import Icon from "../components/Icon";
+import { trustPoints } from "../data/siteData";
 
 export default function HomePage() {
   return (
@@ -129,6 +130,43 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="home-trust" aria-label="Our foundations">
+        <div className="container home-trust__grid">
+          {trustPoints.map((point) => (
+            <article className="home-trust__item" key={point.title}>
+              <span className="home-trust__icon">
+                <Icon name={point.icon} size={22} />
+              </span>
+              <div>
+                <h3>{point.title}</h3>
+                <p>{point.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-cta" aria-labelledby="home-cta-title">
+        <div className="container home-cta__inner">
+          <div>
+            <div className="eyebrow eyebrow--light">
+              <span />
+              Start a Conversation
+            </div>
+            <h2 id="home-cta-title">Let&apos;s build your financial future.</h2>
+            <p>Tell us what you need. Our team will get back to you with clear next steps.</p>
+          </div>
+          <div className="home-cta__actions">
+            <Link className="button button--primary button--large" to="/contact">
+              Request a consultation
+              <Icon name="arrow" size={18} />
+            </Link>
+            <Link className="button home-cta__secondary" to="/services">
+              View our services
+            </Link>
           </div>
         </div>
       </section>
