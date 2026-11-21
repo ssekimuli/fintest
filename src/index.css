@@ -2521,15 +2521,11 @@ a {
   }
 }
 
-/* Paged home: one section at a time */
-.site-shell--all main > .section:first-child {
-  padding-top: 150px;
-}
-
+/* Paged home: section navigation bar at the top */
 .page-pager {
-  padding: 40px 0 56px;
-  background: var(--surface);
-  border-top: 1px solid var(--line);
+  padding: 112px 0 22px;
+  background: var(--navy-deep);
+  color: var(--white);
 }
 
 .page-pager__controls {
@@ -2542,25 +2538,51 @@ a {
 }
 
 .page-pager__btn {
-  min-width: 140px;
-  justify-content: center;
+  min-width: 130px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.page-pager__btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--white);
+}
+
+.page-pager__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.page-pager__btn--solid {
+  background: var(--crimson);
+  border: 1px solid var(--crimson);
+  color: var(--white);
+}
+
+.page-pager__btn--solid:hover {
+  background: var(--crimson-dark);
 }
 
 .page-pager__btn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
   pointer-events: none;
 }
 
 .page-pager__count {
   font-weight: 700;
-  color: var(--navy);
   letter-spacing: 0.04em;
+  color: var(--white);
 }
 
 .page-pager__tabs {
   width: min(1180px, calc(100% - 32px));
-  margin: 24px auto 0;
+  margin: 20px auto 0;
   padding: 0;
   list-style: none;
   display: flex;
@@ -2570,33 +2592,31 @@ a {
 }
 
 .page-pager__tab {
-  padding: 9px 16px;
-  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
-  background: var(--white);
-  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .page-pager__tab:hover {
-  border-color: var(--steel);
-  color: var(--navy);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .page-pager__tab--active,
 .page-pager__tab--active:hover {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: var(--white);
+  background: var(--crimson);
+  border-color: var(--crimson);
 }
 
 @media (max-width: 640px) {
-  .site-shell--all main > .section:first-child {
-    padding-top: 120px;
+  .page-pager {
+    padding-top: 100px;
   }
 
   .page-pager__controls {

@@ -74,6 +74,45 @@ export default function HomePage() {
 
   return (
     <Layout pageName="all">
+      <nav className="page-pager" aria-label="Home page sections">
+        <div className="page-pager__controls">
+          <button
+            type="button"
+            className="page-pager__btn page-pager__btn--ghost"
+            onClick={() => goToPage(pageIndex - 1)}
+            disabled={pageIndex === 0}
+          >
+            ← Previous
+          </button>
+          <span className="page-pager__count">
+            {pageIndex + 1} / {pages.length}
+          </span>
+          <button
+            type="button"
+            className="page-pager__btn page-pager__btn--solid"
+            onClick={() => goToPage(pageIndex + 1)}
+            disabled={pageIndex === pages.length - 1}
+          >
+            Next →
+          </button>
+        </div>
+        <ul className="page-pager__tabs">
+          {pages.map((page, index) => (
+            <li key={page.id}>
+              <button
+                type="button"
+                className={`page-pager__tab ${
+                  index === pageIndex ? "page-pager__tab--active" : ""
+                }`}
+                aria-current={index === pageIndex ? "page" : undefined}
+                onClick={() => goToPage(index)}
+              >
+                {page.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
       {/* Hero Section */}
       {showPage("home") && (
         <section className="hero" id="home">
@@ -689,46 +728,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      <nav className="page-pager" aria-label="Home page sections">
-        <div className="page-pager__controls">
-          <button
-            type="button"
-            className="button button--outline page-pager__btn"
-            onClick={() => goToPage(pageIndex - 1)}
-            disabled={pageIndex === 0}
-          >
-            ← Previous
-          </button>
-          <span className="page-pager__count">
-            {pageIndex + 1} / {pages.length}
-          </span>
-          <button
-            type="button"
-            className="button button--primary page-pager__btn"
-            onClick={() => goToPage(pageIndex + 1)}
-            disabled={pageIndex === pages.length - 1}
-          >
-            Next →
-          </button>
-        </div>
-        <ul className="page-pager__tabs">
-          {pages.map((page, index) => (
-            <li key={page.id}>
-              <button
-                type="button"
-                className={`page-pager__tab ${
-                  index === pageIndex ? "page-pager__tab--active" : ""
-                }`}
-                aria-current={index === pageIndex ? "page" : undefined}
-                onClick={() => goToPage(index)}
-              >
-                {page.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
     </Layout>
   )
 }
